@@ -7,7 +7,8 @@
 `define _And 2'b10
 `define _Or 2'b11
 
-// ZF for zero flag: whether the last execute get a result zero
+// both used in [1:0]CC as index
+// ZF for zero flag: whether the operation results in a zero
 // SF for sign flag: whether get a negetive result
 // OF for overflow flag: whether signed numbers cause an overflow
 // CF for carry flag: whether unsigned numbers cause an overflow
@@ -17,11 +18,11 @@
 `define CF 3
 
 module ALU(
-    output wire [BIT_WISE - 1:0]valE; //value after execute
-    output wire [1:0]CC; //condition code
-    input [1:0]ALUfun; //determine ALU function
-    input [BIT_WISE - 1:0]ALUA; //input A
-    input [BIT_WISE - 1:0]ALUB; //input B
+    output wire [BIT_WISE - 1:0]valE, //value after execute
+    output wire [1:0]CC, //condition code
+    input [1:0]ALUfun, //determine ALU function
+    input [BIT_WISE - 1:0]ALUA, //input A
+    input [BIT_WISE - 1:0]ALUB //input B
 )
     always@(*) begin
         case(ALUfun) begin
