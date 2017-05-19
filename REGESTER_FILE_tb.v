@@ -3,10 +3,16 @@
 `include "head.v"
 module REGISTER_FILE_TB(
 );
-    reg [`DATA_WID - 1:0] valA, valB, valE, valM;
-    reg [`ADDR_WID - 1:0] srcA, srcB, destE, destM;
-    reg [3:0]i;
-    reg [3:0]j;
+    reg [`DATA_WID - 1:0] valA = 0;
+    reg [`DATA_WID - 1:0] valB = 0;
+    reg [`DATA_WID - 1:0] valE = 0;
+    reg [`DATA_WID - 1:0] valM = 0;
+    reg [`ADDR_WID - 1:0] srcA = 0;
+    reg [`ADDR_WID - 1:0] srcB = 0;
+    reg [`ADDR_WID - 1:0] destE = 0;
+    reg [`ADDR_WID - 1:0] destM = 0;
+    reg [3:0]i = 0;
+    reg [3:0]j = 0;
     reg [3:0]k = 0;
     reg CLK = 0;
     always begin
@@ -25,12 +31,12 @@ module REGISTER_FILE_TB(
         .destM(destM)
     );
     initial begin
-        for (i = 4'b0000; i <= 4'b0011; ++i) begin
+      for (i = 4'b0000; i <= 4'b0011; i = i + 1) begin
             valA = 10 + 5 * i;
             srcA = i;
             #5;
         end
-        for (j = 4'b1111; j >= 4'b0100; --j) begin
+      for (j = 4'b1111; j >= 4'b0100; j = j - 1) begin
             valB = 10 + 5 * j;
             srcB = j;
             #5;
@@ -39,7 +45,7 @@ module REGISTER_FILE_TB(
 
     initial begin
         #100;
-        for (k = 4'b0000; k <= 4'b1111; k++) begin
+      for (k = 4'b0000; k <= 4'b1111; k = k + 1) begin
             destE = k;
             destM = 15 - k;
             #1;
