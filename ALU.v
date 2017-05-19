@@ -1,5 +1,6 @@
 //WARNING: valB op valA.
 //when apply to sub, it is valB minus valA
+`timescale 1ns/1ps
 `define BIT_WID 64 // bitwises for input/output
 
 `define _Add 2'b00
