@@ -1,6 +1,6 @@
 //WARNING: valB op valA.
 //when apply to sub, it is valB minus valA
-`define BIT_WISE 64 // bitwises for input/output
+`define BIT_WID 64 // bitwises for input/output
 
 `define _Add 2'b00
 `define _Sub 2'b01
@@ -18,11 +18,11 @@
 `define CF 3
 
 module ALU(
-    output wire [BIT_WISE - 1:0]valE, //value after execute
-    output wire [1:0]CC, //condition code
+    output wire [BIT_WID - 1:0]valE, //value after execute
+    output wire [3:0]CC, //condition code
     input [1:0]ALUfun, //determine ALU function
-    input [BIT_WISE - 1:0]ALUA, //input A
-    input [BIT_WISE - 1:0]ALUB //input B
+    input [BIT_WID - 1:0]ALUA, //input A
+    input [BIT_WID - 1:0]ALUB //input B
 )
     always@(*) begin
         case(ALUfun) begin
@@ -40,11 +40,11 @@ module ALU(
             end
         endcase
     CC[ZF] = valE == 0;
-    CC[SF] = valE[BIT_WISE - 1] == 1;
+    CC[SF] = valE[BIT_WID - 1] == 1;
     // signed overflow iff ALUA and ALUB have the same sign
     // but their result has a different sign
-    CC[OF] = (ALUB[BIT_WISE - 1] == ALUA[BIT_WISE - 1]) && (ALUB[BIT_WISE - 1] != valE[BIT_WISE - 1]);
+    CC[OF] = (ALUB[BIT_WID - 1] == ALUA[BIT_WID - 1]) && (ALUB[BIT_WID - 1] != valE[BIT_WID - 1]);
     // unsigned overflow iff result less than one of operand
     CC[CF] = valE < valA;
     end
-endcase
+endmodule
