@@ -5,7 +5,7 @@
 //below defines some codes for registers
 `ifndef _REG_CODE_
     `define _REG_CODE_ 0
-    `define NUM_OF_REG = 16
+    `define NUM_OF_REG 16
     `define rax_  0
     `define rcx_ 1
     `define rdx_ 2
