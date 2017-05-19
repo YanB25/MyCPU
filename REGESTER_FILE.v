@@ -18,13 +18,16 @@ module REGESTER_FILE (
 
 );
     // TODO: maybe bug, can not initial reg data
-  reg [`DATA_WID - 1:0]data[`NUM_OF_REG - 1 : 0];
-    always@(*) begin
-        valA = data[srcA];
-        valB = data[srcB];
-    end
+    reg [`DATA_WID - 1:0]data[`NUM_OF_REG - 1 : 0];
     always@(posedge CLK) begin
         data[destE] = valE;
         data[destM] = valM;
+        $display("abc: %h %h %h %h %0t", destE, destM, valE, valM, $time);
     end
+    always@(srcA or srcB) begin
+        valA = data[srcA];
+        valB = data[srcB];
+        $display("combination: %h %h %h %h", srcA, srcB, valA, valB);
+    end
+
 endmodule
