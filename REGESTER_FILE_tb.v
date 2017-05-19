@@ -3,8 +3,8 @@
 `include "head.v"
 module REGISTER_FILE_TB(
 );
-    reg [DATA_WID - 1:0] valA, valB, valE, valM;
-    reg [ADDR_WID - 1:0] srcA, srcB, destE, destM;
+    reg [`DATA_WID - 1:0] valA, valB, valE, valM;
+    reg [`ADDR_WID - 1:0] srcA, srcB, destE, destM;
     reg [3:0]i;
     reg [3:0]j;
     reg [3:0]k = 0;
