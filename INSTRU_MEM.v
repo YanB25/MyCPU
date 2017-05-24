@@ -10,14 +10,14 @@ module INSTRU_MEN (
 );
     wire [7:0]INSTRUCTION;
     wire [7:0]REGISTER;
-    reg [0:7]INSTRUCTION_MEM[0:`INS_LENGTH - 1];
+    reg [7:0]INSTRUCTION_MEM[0:`INS_LENGTH - 1];
     always@(*) begin
-      INSTRUCTION = INSTRUCTION_MEM[PC];
-      REGISTER = INSTRUCTION_MEM[PC + 1];
-      valC = INSTRUCTION_MEM[PC + 2:PC + 9];
-      icode = INSTRUCTION[0:3];
-      ifun = INSTRUCTION[4:7];
-      rA = REGISTER[0:3];
-      rB = REGISTER[4:7];
+        INSTRUCTION = INSTRUCTION_MEM[PC];
+        REGISTER = INSTRUCTION_MEM[PC + 1];
+        valC = INSTRUCTION_MEM[PC + 2:PC + 9];
+        ifun = INSTRUCTION[3:0];
+        icode = INSTRUCTION[7:4];
+        rB = REGISTER[3:0];
+        rA = REGISTER[7:4];
     end
 endmodule
