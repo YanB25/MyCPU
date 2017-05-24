@@ -1,0 +1,37 @@
+from re import *
+f = open("assembly_input", "r")
+input_data = f.read()
+
+input_data = sub("halt", "00", input_data)
+input_data = sub("nop", "10", input_data)
+input_data = sub("rrmovq", "20", input_data)
+input_data = sub("irmovq", "30", input_data)
+input_data = sub("rmmovq", "40", input_data)
+input_data = sub("mrmovq", "50", input_data)
+#TODO
+input_data = sub("OPq", "60", input_data)
+input_data = sub("call", "80", input_data)
+input_data = sub("ret", "90", input_data)
+input_data = sub("pushq", "A0", input_data)
+input_data = sub("popq", "B0", input_data)
+
+#for register
+input_data = sub("%rax(,)?(\s)?", "0", input_data)
+input_data = sub("%rcx(,)?(\s)?", "1", input_data)
+input_data = sub("%rdx(,)?(\s)?", "2", input_data)
+input_data = sub("%rbx(,)?\ ?", "3", input_data)
+input_data = sub("%rsp(,)?(\s)?", "4", input_data)
+input_data = sub("%rbp(,)?(\s)?", "5", input_data)
+input_data = sub("%rsi(,)?(\s)?", "6", input_data)
+input_data = sub("%rdi(,)?(\s)?", "7", input_data)
+input_data = sub("%r8(,)?(\s)?", "8", input_data)
+input_data = sub("%r9(,)?(\s)?", "9", input_data)
+input_data = sub("%r10(,)?(\s)?", "10", input_data)
+input_data = sub("%r11(,)?(\s)?", "11", input_data)
+input_data = sub("%r12(,)?(\s)?", "12", input_data)
+input_data = sub("%r13(,)?(\s)?", "13", input_data)
+input_data = sub("%r14(,)?(\s)?", "14", input_data)
+input_data = sub("%r15(,)?(\s)?", "15", input_data)
+
+fout = open("a.s", "w")
+fout.write(input_data)
