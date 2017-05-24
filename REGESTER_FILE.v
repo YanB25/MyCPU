@@ -22,12 +22,12 @@ module REGESTER_FILE (
     always@(posedge CLK) begin
         data[destE] = valE;
         data[destM] = valM;
-        $display("abc: %h %h %h %h %0t", destE, destM, valE, valM, $time);
+        //$display("abc: %h %h %h %h %0t", destE, destM, valE, valM, $time);
     end
     always@(srcA or srcB) begin
         valA = data[srcA];
         valB = data[srcB];
-        $display("combination: %h %h %h %h", srcA, srcB, valA, valB);
+        //$display("combination: %h %h %h %h", srcA, srcB, valA, valB);
     end
 
 endmodule
