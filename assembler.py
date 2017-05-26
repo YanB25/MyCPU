@@ -1,3 +1,21 @@
+from re import *
+import sys
+info = '''
+assembler
+    usage: python3 assembler.py <input-filename> [output-filename] [-b] [-h]
+    -b : output in the form of binary code
+    -h (default) : output in the form of hexadecimal code
+'''
+if len(sys.argv) == 1:
+    print(info)
+    quit()
+elif len(sys.argv) == 2:
+    input_filename = sys.argv[1]
+    output_filename = "a.s"
+else:
+    input_filename = sys.argv[1]
+    output_filename = sys.argv[2]
+
 register = {"%rax":0, "%rcx":1, "%rdx":2, "%rbx":3, "%rsp":4, "%rbp":5, "%rsi":6, "%rdi":7, "%r8": 8, "%r9": 9, "%r10": 10, "%r11": 11, "%r12": 12, "%r13": 13, "%r14": 14}
 # following 2 function uesd to convert number to 64bit hex
 def bit2hex(b):
@@ -26,7 +44,6 @@ def print_error(line_num, msg):
 def print_warning(line_num, msg):
     print("line {} WARNING: {}".format(str(line_num), msg))
 
-from re import *
 # match register
 r_reg = "(%rax|%rcx|%rdx|%rbx|%rsp|%rbp|%rsi|%rdi|%r8|%r9|%r10|%r11|%r12|%r13|%r14)"
 # match register, register
@@ -56,12 +73,13 @@ regex_instru_reg = "({}\s{}$)".format(r_order_reg, r_reg)
 
 regex_instrument = "({}|{}|{}|{}|{}|{}|{})".format(regex_instru_none, regex_instru_reg_reg, regex_instru_reg_valreg, regex_instru_valreg_reg, regex_instru_val, regex_instru_val_reg, regex_instru_reg)
 
-f = open("assembly_input", "r")
+f = open(input_filename, "r")
 input_data = f.read()
 data_line = input_data.split("\n")
 line_num = 0
 #print(data_line)
 error_msgs = ""
+output_data = ""
 for instru in data_line:
     line_num += 1
     ret = instru
@@ -154,12 +172,33 @@ for instru in data_line:
         error_msgs += "line {} ERROR: {}\n".format(str(line_num), msg)
     if (ret != instru):
         print(ret)
+        output_data += ret + '\n'
     else:
         print("-" * 29)
 
 print()
 if (error_msgs != ""):
     print(error_msgs)
+else:
+    fout = open(output_filename, "w")
+    if ("-b" in sys.argv):
+        output_data = sub("0", "0000", output_data)
+        output_data = sub("1", "0001", output_data)
+        output_data = sub("2", "0010", output_data)
+        output_data = sub("3", "0011", output_data)
+        output_data = sub("4", "0100", output_data)
+        output_data = sub("5", "0101", output_data)
+        output_data = sub("6", "0110", output_data)
+        output_data = sub("7", "0111", output_data)
+        output_data = sub("8", "1000", output_data)
+        output_data = sub("9", "1001", output_data)
+        output_data = sub("A", "1010", output_data)
+        output_data = sub("B", "1011", output_data)
+        output_data = sub("C", "1100", output_data)
+        output_data = sub("D", "1101", output_data)
+        output_data = sub("E", "1110", output_data)
+        output_data = sub("F", "1111", output_data)
 
+    fout.write(output_data)
 #fout = open("a.s", "w")
 #fout.write(input_data)
