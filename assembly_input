@@ -1,3 +1,18 @@
-rrmovq %rax, %rbx
-call
 halt
+nop
+rrmovq %rax, %rcx
+irmovq $(-1), %rdx
+rmmovq %rbx, $(8)%rbx
+mrmovq $(16)%rdx, %rsp
+addq %rax, %rdx
+subq %rbp, %si
+andq %rdi, %r8
+xorq %r9, (%r10)
+jmp $(0)
+jge $(32)
+cmove %r11, %r12
+call $(64)
+ret
+pushq %rax
+popq %rax
+
