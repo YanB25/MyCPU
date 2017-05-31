@@ -46,4 +46,5 @@
     `define _ADR 2
     `define _INS 3
     `define _HLT 4
+    `define _CMOVXX 2
 `endif
