@@ -7,7 +7,6 @@ module PC (
     input Cnd,
     input [`DATA_WID - 1 : 0] valC,
     input [`DATA_WID - 1 : 0] valM,
-    // warning: valP is increasement
     input [`DATA_WID - 1: 0] valP
 );
     initial begin
@@ -22,7 +21,7 @@ module PC (
         end else if (icode == `_RET) begin
             NEW_PC = valM;
         end else begin
-            NEW_PC = NEW_PC + valP;
+            NEW_PC = valP;
         end
     end
 endmodule
