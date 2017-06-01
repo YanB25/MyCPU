@@ -25,14 +25,25 @@ module INSTRU_MEN (
         //$display("RE %h", REGISTER);
         
         //
-        valC[7:0] = INSTRUCTION_MEM[PC + 2];
-        valC[15:8] = INSTRUCTION_MEM[PC + 3];
-        valC[23:16] = INSTRUCTION_MEM[PC + 4];
-        valC[31:24] = INSTRUCTION_MEM[PC + 5];
-        valC[39:32] = INSTRUCTION_MEM[PC + 6];
-        valC[47:40] = INSTRUCTION_MEM[PC + 7];
-        valC[55:48] = INSTRUCTION_MEM[PC + 8];
-        valC[63:56] = INSTRUCTION_MEM[PC + 9];
+        if (icode == `_JXX || icode == `_CALL) begin
+            valC[7:0] = INSTRUCTION_MEM[PC + 1];
+            valC[15:8] = INSTRUCTION_MEM[PC + 2];
+            valC[23:16] = INSTRUCTION_MEM[PC + 3];
+            valC[31:24] = INSTRUCTION_MEM[PC + 4];
+            valC[39:32] = INSTRUCTION_MEM[PC + 5];
+            valC[47:40] = INSTRUCTION_MEM[PC + 6];
+            valC[55:48] = INSTRUCTION_MEM[PC + 7];
+            valC[63:56] = INSTRUCTION_MEM[PC + 8];
+        end else begin
+            valC[7:0] = INSTRUCTION_MEM[PC + 2];
+            valC[15:8] = INSTRUCTION_MEM[PC + 3];
+            valC[23:16] = INSTRUCTION_MEM[PC + 4];
+            valC[31:24] = INSTRUCTION_MEM[PC + 5];
+            valC[39:32] = INSTRUCTION_MEM[PC + 6];
+            valC[47:40] = INSTRUCTION_MEM[PC + 7];
+            valC[55:48] = INSTRUCTION_MEM[PC + 8];
+            valC[63:56] = INSTRUCTION_MEM[PC + 9];
+        end
         //
         ifun = INSTRUCTION[3:0];
         icode = INSTRUCTION[7:4];
