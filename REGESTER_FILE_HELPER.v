@@ -6,14 +6,16 @@ module SRC_A(
     input [3:0] icode,
     output reg [3:0] OUT
 );
-    case(icode)
-        `_IRMOV, `_MRMOV, `_JXX, `_CALL:
-            OUT = `NonReg_;
-        `_POP, `_RET :
-            OUT = `rsp_;
-        default :
-            OUT = rA;
-    endcase
+    always@(*) begin
+        case(icode)
+            `_IRMOV, `_MRMOV, `_JXX, `_CALL:
+                OUT = `NonReg_;
+            `_POP, `_RET :
+                OUT = `rsp_;
+            default :
+                OUT = rA;
+        endcase
+    end
 endmodule
 
 module SRC_B(
@@ -21,14 +23,16 @@ module SRC_B(
     input [3:0] icode,
     output reg [3:0] OUT
 );
-    case (icode)
-        `_RRMOV, `_IRMOV, `_JXX :
-            OUT = `NonReg_;
-        `_push, `_POP, `_CALL, `_RET :
-            OUT = `rsp_;
-        default :
-            OUT = rB;
-    endcase
+    always@(*) begin
+        case (icode)
+            `_RRMOV, `_IRMOV, `_JXX :
+                OUT = `NonReg_;
+            `_PUSH, `_POP, `_CALL, `_RET :
+                OUT = `rsp_;
+            default :
+                OUT = rB;
+        endcase
+    end
 endmodule
 
 module DEST_E(
@@ -37,21 +41,23 @@ module DEST_E(
     input Cnd,
     output reg [3:0] OUT
 );
-    case(icode)
-        `_CMOVXX : begin
-            if (Cnd) begin
-                OUT = rB;
-            end else begin
-                OUT = `NonReg_;
+    always@(*) begin
+        case(icode)
+            `_CMOVXX : begin
+                if (Cnd) begin
+                    OUT = rB;
+                end else begin
+                    OUT = `NonReg_;
+                end
             end
-        end
-        `_RMMOV, `_MRMOV, `_JXX :
-            OUT = `NonReg_;
-        `_PUSH, `_POP, `_CALL, `_RET :
-            OUT = `rsp_;
-        default :
-            OUT = rB;
-    endcase
+            `_RMMOV, `_MRMOV, `_JXX :
+                OUT = `NonReg_;
+            `_PUSH, `_POP, `_CALL, `_RET :
+                OUT = `rsp_;
+            default :
+                OUT = rB;
+        endcase
+    end
 endmodule
 
 module DEST_M(
@@ -59,12 +65,14 @@ module DEST_M(
     input [3:0] icode,
     output reg [3:0] OUT
 );
-    case(icode)
-        `_MRMOV, `_POP :
-            OUT = rA;
-        default :
-            OUT = `NonReg_;
-    endcase
+    always@(*) begin
+        case(icode)
+            `_MRMOV, `_POP :
+                OUT = rA;
+            default :
+                OUT = `NonReg_;
+        endcase
+    end
 endmodule
 
 
