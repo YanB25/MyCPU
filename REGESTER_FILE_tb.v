@@ -1,20 +1,12 @@
 `timescale 1ns/1ps
-
 `include "head.v"
 module REGISTER_FILE_TB(
 );
 
-    wire [`DATA_WID - 1:0] valA = 0;
-    wire [`DATA_WID - 1:0] valB = 0;
+    wire [`DATA_WID - 1:0] valA;
+    wire [`DATA_WID - 1:0] valB;
     reg [`DATA_WID - 1:0] valE = 0;
     reg [`DATA_WID - 1:0] valM = 0;
-    reg [`ADDR_WID - 1:0] srcA = 0;
-    reg [`ADDR_WID - 1:0] srcB = 0;
-    reg [`ADDR_WID - 1:0] destE = 0;
-    reg [`ADDR_WID - 1:0] destM = 0;
-    reg [3:0]i = 0;
-    reg [3:0]j = 0;
-    reg [3:0]k = 0;
     reg CLK = 0;
     wire [3:0]OUTA;
     wire [3:0]OUTB;
@@ -23,9 +15,10 @@ module REGISTER_FILE_TB(
     reg [`ADDR_WID - 1:0] rA;
     reg [`ADDR_WID - 1:0] rB;
     reg [3:0] icode;
-    
+    reg Cnd;
+    parameter period = 10;
     always begin
-        #5;
+        #(period/2);
         CLK = ~CLK;
     end
 
@@ -34,7 +27,7 @@ module REGISTER_FILE_TB(
         .icode(icode),
         .OUT(OUTA)
     );
-    SCR_B src_b(
+    SRC_B src_b(
         .rB(rB),
         .icode(icode),
         .OUT(OUTB)
@@ -62,34 +55,44 @@ module REGISTER_FILE_TB(
         .destM(OUTM)
     );
     initial begin
-        //irmovq $(10) %rax
+        //irmovq $(3) %rax
         icode = `_IRMOV;
-        scrA = 'rdx_; //F
-        scrB = 'rsp_; //F
-        destE = 'rax_; //%rax
-        destM = 'rbx_; //F
-        valE = 10;
-        valM = 20; //not this
-
-        #5;
+        rA = `rdx_; //F
+        rB = `rax_; //F
+        valE = 3;
+        valM = 4; //
+        #10;
         //rrmovq %rax %rcx
-        icode = `_RRMOVQ;
-        scrA = `rax_; //%rax
-        srcB = `rcx_; //F
-        destE = `rcx_; //%rcx
-        destM = `rsi_; //F
+        Cnd = 1;
+        icode = `_RRMOV;
+        rA = `rax_; //%rax
+        rB = `rcx_; //F
         valE = 7; //
-        valM = 9; //
+        valM = 15; //
 
-        #5;
+        /*#10;
         //call $(35)
         icode = `_CALL;
-        scrA = `rcx_; //F
-        scrB = `NonReg_; //%rsp
-        destE = `rsi_; //%rsp
-        destM = `rax_; //F
-        valE = 35;
-        valM = 10; //
+        rA = `rcx_; //F
+        rB = `NonReg_; //%rsp
+        valE = 56;
+        valM = 6; //
+        
+        #10;
+        icode = `_PUSH;
+        rA = `rax_;
+        rB = `r11_; // ignore
+        valE = 48;
+        valM = 19;
+        
+        #10;
+        icode = `_POP;
+        rA = `rsi_;
+        rB = `r10_;
+        valE = 56;
+        valM = 21;
+        
+     */   
     end
 
 

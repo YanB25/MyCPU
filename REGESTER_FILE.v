@@ -18,6 +18,10 @@ module REGESTER_FILE (
 
 );
     // TODO: maybe bug, can not initial reg data
+    initial begin
+        //TODO: change the number
+        data[`rsp_] = 64;
+    end
     reg [`DATA_WID - 1:0]data[`NUM_OF_REG - 1 : 0];
     always@(posedge CLK) begin
         data[destE] = valE;
