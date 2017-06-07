@@ -1,6 +1,11 @@
+//ADDR_WID means address width
+// the length of index for _REG_CODE_
+`define DATA_WID 64
+`define ADDR_WID 4
 //below defines some codes for registers
 `ifndef _REG_CODE_
     `define _REG_CODE_ 0
+    `define NUM_OF_REG 16
     `define rax_  0
     `define rcx_ 1
     `define rdx_ 2
@@ -41,4 +46,5 @@
     `define _ADR 2
     `define _INS 3
     `define _HLT 4
+    `define _CMOVXX 2
 `endif
