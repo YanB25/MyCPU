@@ -37,4 +37,11 @@
 ## WARNING:
 1. 条件码应修改为锁存器
 2. 汇编器和取指器的分工应完善
+3. 若改变文件储存位置后无法识别head.v，则考虑
+// tmp
+commit 9de35bdb0212df3da09c7791e07aabde1c456584
+Author: WalkerYF <Walkeryf@yeah.net>
+Date:   Wed Jun 7 21:45:07 2017 +0800
+
+    debug : register file / tb / helper
 
