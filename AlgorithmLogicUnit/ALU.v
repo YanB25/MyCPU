@@ -1,22 +1,11 @@
 //WARNING: valB op valA.
 //when apply to sub, it is valB minus valA
+//but when apply to greater, like jg %rA, %rB, it means jump if %rB-%rA > 0,
+    //or if rB > rA
 `timescale 1ns/1ps
 `define BIT_WID 64 // bitwises for input/output
+`include "head.v"
 
-`define _Add 2'b00
-`define _Sub 2'b01
-`define _And 2'b10
-`define _Or 2'b11
-
-// both used in [1:0]CC as index
-// ZF for zero flag: whether the operation results in a zero
-// SF for sign flag: whether get a negetive result
-// OF for overflow flag: whether signed numbers cause an overflow
-// CF for carry flag: whether unsigned numbers cause an overflow
-`define ZF 0 
-`define SF 1
-`define OF 2
-`define CF 3
 
 module ALU(
     output reg [BIT_WID - 1:0]valE, //value after execute
@@ -27,7 +16,7 @@ module ALU(
     input set_cond
 )
     always@(*) begin
-        case(ALUfun) begin
+        case(ALUfun)
             _Add : begin
                 valE = ALUB + ALUA;
             end
