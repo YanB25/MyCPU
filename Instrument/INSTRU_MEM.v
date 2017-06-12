@@ -24,7 +24,7 @@ module INSTRU_MEN (
         REGISTER = INSTRUCTION_MEM[PC + 1];
         //$display("RE %h", REGISTER);
         
-        //
+        // TODO: bug
         if (icode == `_JXX || icode == `_CALL) begin
             valC[7:0] = INSTRUCTION_MEM[PC + 1];
             valC[15:8] = INSTRUCTION_MEM[PC + 2];
