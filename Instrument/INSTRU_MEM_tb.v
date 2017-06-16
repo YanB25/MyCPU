@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-`include "head.v"
+`include "./../header/head.v"
 module INSTRU_MEN_tb (
 );
     reg [`DATA_WID - 1: 0]PC;

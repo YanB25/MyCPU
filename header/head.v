@@ -48,3 +48,35 @@
     `define _HLT 4
     `define _CMOVXX 2
 `endif
+
+`ifndef ALU_FUN_CODE
+    `define ALU_FUN_CODE 0
+    `define _Add 2'b00
+    `define _Sub 2'b01
+    `define _And 2'b10
+    `define _Or 2'b11
+`endif
+
+`ifndef REL_CODE
+    `define REL_CODE 0
+    `define NonCond 0
+    `define REL_LE 1
+    `define REL_L 2
+    `define REL_E 3
+    `define REL_NE 4
+    `define REL_GE 5
+    `define REL_G 6
+`endif
+
+`ifndef _CONDITION_CODE_
+    `define _CONDITION_CODE_ 0
+    // both used in [1:0]CC as index
+    // ZF for zero flag: whether the operation results in a zero
+    // SF for sign flag: whether get a negetive result
+    // OF for overflow flag: whether signed numbers cause an overflow
+    // CF for carry flag: whether unsigned numbers cause an overflow
+    `define ZF 0 
+    `define SF 1
+    `define OF 2
+    `define CF 3
+`endif
