@@ -1,15 +1,16 @@
 `timescale 1ns/1ps
-`include "head.v"
+`include "../header/head.v"
 module REGISTER_FILE_ALL(
-    input reg [`ADDR_WID - 1:0] rA;
-    input reg [`ADDR_WID - 1:0] rB;
-    input reg [3:0] icode;
-    input reg Cnd;
+    input CLK,
+    input reg [`ADDR_WID - 1:0] rA,
+    input reg [`ADDR_WID - 1:0] rB,
+    input reg [3:0] icode,
+    input reg Cnd,
 
-    output wire [`DATA_WID - 1:0] valA;
-    output wire [`DATA_WID - 1:0] valB;
-    output reg [`DATA_WID - 1:0] valE = 0;
-    output reg [`DATA_WID - 1:0] valM = 0;
+    output wire [`DATA_WID - 1:0] valA,
+    output wire [`DATA_WID - 1:0] valB,
+    output reg [`DATA_WID - 1:0] valE,
+    output reg [`DATA_WID - 1:0] valM
 );
 
     wire [3:0]OUTA;
@@ -17,12 +18,12 @@ module REGISTER_FILE_ALL(
     wire [3:0]OUTE;
     wire [3:0]OUTM;
 
-    reg CLK = 0;
-    parameter period = 10;
-    always begin
-        #(period/2);
-        CLK = ~CLK;
-    end
+    // reg CLK = 0;
+    // parameter period = 10;
+    // always begin
+    //     #(period/2);
+    //     CLK = ~CLK;
+    // end
 
 
     SRC_A src_a(

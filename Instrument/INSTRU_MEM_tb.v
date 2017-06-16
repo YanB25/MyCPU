@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 `include "./../header/head.v"
-module INSTRU_MEN_tb (
+module INSTRU_MEM_tb (
 );
     reg [`DATA_WID - 1: 0]PC;
     wire [3:0] icode;

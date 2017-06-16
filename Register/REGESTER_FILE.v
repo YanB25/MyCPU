@@ -1,7 +1,7 @@
 // combinational circuit when read data
 // sequential circuit when write data
 `timescale 1ns/1ps
-`include "head.v"
+`include "../header/head.v"
 
 module REGESTER_FILE (
     input CLK,

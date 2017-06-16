@@ -18,7 +18,7 @@ module INSTRU_MEN (
         $display("%h %h %h %h", INSTRUCTION_MEM[0], INSTRUCTION_MEM[1], INSTRUCTION_MEM[2], INSTRUCTION_MEM[3]);
     end
     always@(*) begin
-        $display("PC %h", PC[3:0]);
+        // $display("PC %h", PC[3:0]);
         INSTRUCTION = INSTRUCTION_MEM[PC];
         //$display("IN %h %h", INSTRUCTION, PC);
         REGISTER = INSTRUCTION_MEM[PC + 1];

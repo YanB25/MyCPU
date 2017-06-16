@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-`include "head.v"
+`include "../header/head.v"
 module REGISTER_FILE_TB(
 );
 
