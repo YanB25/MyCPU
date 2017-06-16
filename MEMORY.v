@@ -3,7 +3,7 @@
 
 `timescale 1ns/1ps
 `include "head.v"
-`define SIZE_OF_MEMORY 100
+`define SIZE_OF_MEMORY 10
 
 module MEMORY(
     input wire [`DATA_WID - 1 : 0] write_data,

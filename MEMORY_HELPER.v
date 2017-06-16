@@ -5,11 +5,11 @@
 `include "head.v"
 
 module MEM_ADDR(
-    input wire [`ADDR_WID - 1 : 0] valE,
-    input wire [`ADDR_WID - 1 : 0] valA,
+    input wire [`DATA_WID - 1 : 0] valE,
+    input wire [`DATA_WID - 1 : 0] valA,
     input wire [`ADDR_WID - 1 : 0] icode,
 
-    output reg [`ADDR_WID - 1 : 0 ] OUT
+    output reg [`DATA_WID - 1 : 0 ] OUT
 );
 
     always@(*) begin
@@ -18,8 +18,8 @@ module MEM_ADDR(
                 OUT = valE;
             `_POP, `_RET:
                 OUT = valA;
-            // default : 
-            //     OUT = ;
+             default : 
+                 OUT = OUT;
             // TODO: if it don't need the address.
         endcase
     end
@@ -27,11 +27,11 @@ module MEM_ADDR(
 endmodule // 
 
 module MEM_DATA(
-    input wire [`ADDR_WID - 1 : 0] valP,
-    input wire [`ADDR_WID - 1 : 0] valA,
+    input wire [`DATA_WID - 1 : 0] valP,
+    input wire [`DATA_WID - 1 : 0] valA,
     input wire [`ADDR_WID - 1 : 0] icode,
 
-    output reg [`ADDR_WID - 1 : 0] OUT
+    output reg [`DATA_WID - 1 : 0] OUT
 );
 
     always@(*) begin 
@@ -41,8 +41,9 @@ module MEM_DATA(
             `_CALL:
                 OUT = valP;
             // `_MRMOV, `_RET, `_POP:
-            // default:
-            // TODO: if it don't write data.
+             default:
+                OUT = OUT;
+                // TODO: if it don't write data.
         endcase
     end
 endmodule // MEM_DATA
@@ -90,12 +91,15 @@ module STAT(
     // `OK  `ADR  `INS  `HLT 
     // TODO: output the state.
     //  How to decide the state.
+    initial begin
+        stat = 4'b0001;
+    end
     always@(*) begin
         // case (icode)
         //     `HALT:
         //         stat = `HLT;
         
         // endcase
-
+       
     end
 endmodule // STAT
