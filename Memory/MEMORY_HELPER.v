@@ -2,7 +2,7 @@
 // 2017/6/7 22:10
 
 `timescale 1ns/1ps
-`include "head.v"
+`include "./../header/head.v"
 
 module MEM_ADDR(
     input wire [`DATA_WID - 1 : 0] valE,
