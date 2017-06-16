@@ -1,11 +1,11 @@
 `timescale 1ns/1ps
-`include "head.v"
+`include "../header/head.v"
 
 module ALUA(
     input [`DATA_WID - 1:0]valA,
     input [`DATA_WID - 1:0]valC,
     input [3:0]icode,
-    output [`DATA_WID - 1:0]OUT
+    output reg [`DATA_WID - 1:0]OUT
 );
     always@(*) begin
         case(icode)
@@ -21,12 +21,12 @@ module ALUB(
     input [`DATA_WID - 1:0] valB,
     input [`DATA_WID - 1:0] valC,
     input [3:0]icode,
-    output [`DATA_WID - 1:0]OUT
+    output reg[`DATA_WID - 1:0]OUT
 );
 
     always@(*) begin
         case(icode)
-            '_OP, `_RMMOV, `_MRMOV, `_PUSH, `_POP, `_CALL, `_RET : OUT = valB;
+            `_OP, `_RMMOV, `_MRMOV, `_PUSH, `_POP, `_CALL, `_RET : OUT = valB;
             default : OUT = 0;
         endcase
     end
@@ -35,13 +35,13 @@ endmodule
 module ALUFUN(
     input [3:0]icode,
     input [3:0]ifun,
-    output [1:0]OUT
+    output reg [1:0]OUT
 );
     always@(*) begin
         case(icode)
             `_RRMOV, `_RMMOV, `_IRMOV, `_MRMOV, `_POP, `_RET, `_CMOVXX : OUT = `_Add;
             `_PUSH, `_CALL : OUT = `_Sub;
-            default : ifun; //Jxx come here
+            default : OUT = ifun; //Jxx come here
         endcase
     end
 endmodule
@@ -49,7 +49,7 @@ endmodule
 module SET_CC(
     input [3:0]icode,
     //input [3:0]ifun,
-    output OUT
+    output reg OUT
 );
     always@(*) begin
         OUT = (icode == `_OP);

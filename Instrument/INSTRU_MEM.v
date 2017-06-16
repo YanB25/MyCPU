@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-`include "head.v"
+`include "./../header/head.v"
 `define INS_LENGTH 2048
 module INSTRU_MEN (
     input [`DATA_WID - 1: 0]PC,
@@ -14,7 +14,7 @@ module INSTRU_MEN (
     //parameter [7:0] lsfr_taps [0 : 1024]   = '{8'd9, 8'd5, 8'd3, 8'h21, 8'd9, 8'd9, 8'd5, 8'd9};
     reg [7:0]INSTRUCTION_MEM[0:`INS_LENGTH - 1];
     initial begin
-        $readmemh("F:/code/MyCPU/instrument_input.mem", INSTRUCTION_MEM);
+        $readmemh("F:/code/MyCPU/Instrument/instrument_input.mem", INSTRUCTION_MEM);
         $display("%h %h %h %h", INSTRUCTION_MEM[0], INSTRUCTION_MEM[1], INSTRUCTION_MEM[2], INSTRUCTION_MEM[3]);
     end
     always@(*) begin

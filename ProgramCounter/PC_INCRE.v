@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-`include "head.v"
+`include  "../header/head.v"
 
 module PC_INCRE (
     output reg[`DATA_WID - 1 : 0] valP,
@@ -13,7 +13,7 @@ module PC_INCRE (
         `_NOP, `_RET : valP = PC + 1;
         `_RRMOV, `_OP, `_CMOVXX, `_PUSH, `_POP : valP = PC + 2;
         `_JXX, `_CALL : valP = PC + 9;
-        `_IRMOV, `_RMMOV, `_MRMOVQ : valP = PC + 10;
+        `_IRMOV, `_RMMOV, `_MRMOV : valP = PC + 10;
         default: 
             valP = PC;
       endcase

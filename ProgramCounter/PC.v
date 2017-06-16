@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-`include "head.v"
+`include "../header/head.v"
 module PC (
     input CLK,
     output reg [`DATA_WID - 1 : 0] NEW_PC,

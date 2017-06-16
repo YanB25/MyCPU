@@ -1,16 +1,13 @@
 `timescale 1ns/1ps
-`include "head.v"
+`include "../header/head.v"
 
 module ALU_tb(
 );
     reg [3:0] icode;
     reg [3:0] ifun;
-    reg [DATA_WID - 1:0]valA;
-    reg [DATA_WID - 1:0]valB;
-    reg [DATA_WID - 1:0]valC;
-    wire [`DATA_WID - 1:0] OUT;
-    wire set_cond;
-
+    reg [`DATA_WID - 1:0]valA;
+    reg [`DATA_WID - 1:0]valB;
+    reg [`DATA_WID - 1:0]valC;
     wire [`DATA_WID - 1:0]OUTA;
     ALUA alua(
         .valA(valA),
@@ -103,7 +100,7 @@ module ALU_tb(
         icode = `_POP;
         ifun = 0;
         valA = 5; //ignore
-        valB = 32; // suppose to -8;
+        valB = 32; // suppose to +8;
 
 #5;
         icode = `_IRMOV;
@@ -117,7 +114,7 @@ module ALU_tb(
         icode = `_OP;
         ifun = `_Sub;
         valA = 5;
-        valB = 5;
+        valB = 4;
 #5;
         icode = `_CMOVXX;
         ifun = `REL_E;
@@ -137,7 +134,7 @@ module ALU_tb(
 #5;
         icode = `_JXX;
         ifun = `REL_GE;
-        
+      
     end
 endmodule
     
