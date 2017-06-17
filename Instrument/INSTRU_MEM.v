@@ -11,6 +11,7 @@ module INSTRU_MEN (
 );
     reg [7:0]INSTRUCTION;
     reg [7:0]REGISTER;
+    reg test;
     //parameter [7:0] lsfr_taps [0 : 1024]   = '{8'd9, 8'd5, 8'd3, 8'h21, 8'd9, 8'd9, 8'd5, 8'd9};
     reg [7:0]INSTRUCTION_MEM[0:`INS_LENGTH - 1];
     initial begin
@@ -25,6 +26,11 @@ module INSTRU_MEN (
         //$display("RE %h", REGISTER);
         
         // TODO: bug
+//        test = icode == `_JXX || icode == `_CALL
+        ifun = INSTRUCTION[3:0];
+        icode = INSTRUCTION[7:4];
+        rB = REGISTER[3:0];
+        rA = REGISTER[7:4];
         if (icode == `_JXX || icode == `_CALL) begin
             valC[7:0] = INSTRUCTION_MEM[PC + 1];
             valC[15:8] = INSTRUCTION_MEM[PC + 2];
@@ -45,9 +51,6 @@ module INSTRU_MEN (
             valC[63:56] = INSTRUCTION_MEM[PC + 9];
         end
         //
-        ifun = INSTRUCTION[3:0];
-        icode = INSTRUCTION[7:4];
-        rB = REGISTER[3:0];
-        rA = REGISTER[7:4];
+
     end
 endmodule
