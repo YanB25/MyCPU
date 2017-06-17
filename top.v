@@ -1,8 +1,17 @@
 `timescale 1ns/1ps
 `include "header/head.v"
 module CPU(
-    input CLK
+    //input CLK
 );
+    //below for debug
+        reg CLK = 0;
+        parameter period = 10;
+        always begin
+            #(period / 2);
+            CLK = ~CLK;
+        end
+    //below end
+            
     wire [`DATA_WID - 1:0]PC;
     wire [3:0] icode;
     wire Cnd;
