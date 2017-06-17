@@ -6,6 +6,7 @@
 `define SIZE_OF_MEMORY 10
 
 module MEMORY(
+    input wire CLK,
     input wire [`DATA_WID - 1 : 0] write_data,
     input wire [`DATA_WID - 1  : 0] addr,
     input wire write_flag,
@@ -19,15 +20,24 @@ reg [`DATA_WID - 1 :0] data[`SIZE_OF_MEMORY : 0];
 
 assign dmem_error = (addr > `SIZE_OF_MEMORY)?1:0;
 
-always@(*) begin 
-    case ( {write_flag, read_flag} )
-        2'b01://read
-            valM = data[addr];
-        2'b10://write
-            data[addr] = write_data;
-        default://00 11 TODO: how to solve this situation?
-            valM = valM;
-    endcase
+
+always@(posedge CLK) begin 
+    if (write_flag == 1) begin
+        data[addr] = write_data;
+    end
+    else begin
+        data[addr] = data[addr];
+    end
+
+end
+
+always@(read_flag or data) begin
+    if (read_flag == 1) begin
+        valM = data[addr];
+    end
+    else begin
+        valM = valM;
+    end
 end
 
 

@@ -24,6 +24,12 @@ wire write_flag;// wire
 wire read_flag; // wire
 wire dmem_error; // wire
 
+    reg CLK = 0;
+    parameter period = 10;
+    always begin
+        #(period/2);
+        CLK = ~CLK;
+    end
 
 MEM_ADDR mem_addr1(
     .valE(valE),
@@ -52,6 +58,7 @@ MEM_WRITE mem_write1(
 );
 
 MEMORY memory1(
+    .CLK(CLK),
     .write_data(output_data),
     .addr(output_addr),
     .write_flag(write_flag),
@@ -136,6 +143,11 @@ initial begin
         valP = 8'h99;
     #10;
         icode = 4'h9;//ret
+        valE = 8'h09;
+        valA = 8'h09;
+        valP = 8'h20;
+    #10;
+        icode = 4'h2;//ret
         valE = 8'h09;
         valA = 8'h09;
         valP = 8'h20;
