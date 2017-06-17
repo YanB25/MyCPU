@@ -242,7 +242,7 @@ else:
 
     # change label into number
     for label in label2line:
-        subNumber = num2hex(label2line[label] - 1)
+        subNumber = num2hex(num_of_bits_till_this_line[label2line[label] - 1])
         output_data = sub("." + label, subNumber, output_data)
     fout.write(output_data)
 #fout = open("a.s", "w")
