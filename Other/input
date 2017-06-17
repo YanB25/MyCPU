@@ -1,5 +1,6 @@
 halt
 nop
+.YB:
 rrmovq %rax, %rcx
 irmovq $(-1), %rdx
 rmmovq %rbx, $(8)%rbx
@@ -8,10 +9,10 @@ addq %rax, %rdx
 subq %rbp, %rsi
 andq %rdi, %r8
 xorq %r9, %r10
-jmp $(0)
-jge $(32)
+jmp .YB    
+jge .YB 
 cmove %r11, %r12
-call $(64)
+call .YB
 ret
 pushq %rax
 popq %rax
