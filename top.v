@@ -57,6 +57,7 @@ module CPU(
     );
 
     ALU_MODULE alu_module(
+        .CLK(CLK),
         .icode(icode),
         .ifun(ifun),
         .valA(valA),

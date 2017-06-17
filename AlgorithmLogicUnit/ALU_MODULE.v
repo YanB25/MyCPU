@@ -2,6 +2,7 @@
 `include "../header/head.v"
 
 module ALU_MODULE(
+    input CLK,
     input [3:0] icode,
     input [3:0] ifun,
     input [`DATA_WID - 1:0]valA,
@@ -52,6 +53,7 @@ module ALU_MODULE(
     );
 
     ALU alu(
+        .CLK(CLK),
         .valE(valE),
         .CC(CC),
         .ALUfun(OUTALUFun),

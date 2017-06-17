@@ -11,7 +11,6 @@ module INSTRU_MEN (
 );
     reg [7:0]INSTRUCTION;
     reg [7:0]REGISTER;
-    reg test;
     //parameter [7:0] lsfr_taps [0 : 1024]   = '{8'd9, 8'd5, 8'd3, 8'h21, 8'd9, 8'd9, 8'd5, 8'd9};
     reg [7:0]INSTRUCTION_MEM[0:`INS_LENGTH - 1];
     initial begin

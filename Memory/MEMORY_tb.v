@@ -86,44 +86,44 @@ initial begin
         valP = 8'h20;
     #10;     
         icode = 4'h4;
-        valE = 8'h01;
+        valE = 8'd08;
         valA = 8'h11;
         valP = 8'h20;
     #10;
         icode = 4'h4;
-        valE = 8'h02;
+        valE = 8'd16;
         valA = 8'h22;
         valP = 8'h20;
     #10;
         icode = 4'h4;
-        valE = 8'h03;
+        valE = 8'd24;
         valA = 8'h33;
         valP = 8'h20;
     #10;
         icode = 4'h4;
-        valE = 8'h04;
+        valE = 8'd32;
         valA = 8'h44;
         valP = 8'h20;
     #10;
         icode = 4'h4;
-        valE = 8'h05;
+        valE = 8'd40;
         valA = 8'h55;
         valP = 8'h20;
     #10;
         icode = 4'h4;
-        valE = 8'h06;
+        valE = 8'd48;
         valA = 8'h66;
         valP = 8'h20;
     #10;
         icode = 4'h4;//rmmov
-        valE = 8'h07;
+        valE = 8'd56;
         valA = 8'h77;
         valP = 8'h20;
     #10;
 // initialize memory from  01 to 07
  
         icode = 4'h5;//mrmov
-        valE = 8'h03;
+        valE = 8'h08;
         valA = 8'h30;
         valP = 8'h20;
     #10;

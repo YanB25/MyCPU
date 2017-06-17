@@ -5,6 +5,10 @@ halt
 
 
 .fun:
+pushq %rbx
+irmovq $(1), %rax
+rrmovq %rdi, %rbx
+
 irmovq $(1), %rcx
 irmovq $(2), %rdx
 subq %rdi, %rcx
@@ -12,24 +16,22 @@ je .Base
 subq %rdi, %rdx
 je .Base
 
-irmovq $(1), %rsi
-pushq %rdi
-
-subq %rsi, %rdi
+irmovq $(1), %r8
+subq %r8, %rbx
+rrmovq %rbx, %rdi
 call .fun
 
 rrmovq %rax, %rsi
-pushq %rsi
 
-irmovq $(1), %rsi
-subq %rsi, %rdi
+irmovq $(1), %r8
+subq %r8, %rbx
+rrmovq %rbx, %rdi
 call .fun
 
-popq %rsi
-popq %rdi
 addq %rsi, %rax
+
 ret
 
 .Base:
-irmovq $(1), %rax
+popq %rbx
 ret
