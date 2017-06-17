@@ -6,47 +6,47 @@
 `ifndef _REG_CODE_
     `define _REG_CODE_ 0
     `define NUM_OF_REG 16
-    `define rax_  0
-    `define rcx_ 1
-    `define rdx_ 2
-    `define rbx_ 3
-    `define rsp_ 4
-    `define rbp_ 5
-    `define rsi_ 6
-    `define rdi_ 7
-    `define r8_ 8
-    `define r9_ 9
-    `define r10_ 10
-    `define r11_ 11
-    `define r12_ 12
-    `define r13_ 13
-    `define r14_ 14
-    `define NonReg_ 15
+    `define rax_  4'b0000
+    `define rcx_ 4'b0001
+    `define rdx_ 4'b0010
+    `define rbx_ 4'b0011
+    `define rsp_ 4'b0100
+    `define rbp_ 4'b0101
+    `define rsi_ 4'b0110
+    `define rdi_ 4'b0111
+    `define r8_ 4'b1000
+    `define r9_ 4'b1001
+    `define r10_ 4'b1010
+    `define r11_ 4'b1011
+    `define r12_ 4'b1100
+    `define r13_ 4'b1101
+    `define r14_ 4'b1110
+    `define NonReg_ 4'b1111
 `endif
 
 //below defines some codes for flags
 `ifndef _CONST_FLAG_
     `define _CONST_FLAG_ 0
-    `define _HALT 0
-    `define _NOP 1
-    `define _RRMOV 2
-    `define _IRMOV 3
-    `define _RMMOV 4
-    `define _MRMOV 5
-    `define _OP 6
-    `define _JXX 7
-    `define _CALL 8
-    `define _RET 9
-    `define _PUSH 10
-    `define _POP 11
-    `define _NONE 0
-    `define _RSP 4
-    `define _REGNONE 15
+    `define _HALT 4'b0000
+    `define _NOP 4'b0001
+    `define _RRMOV 4'b0010
+    `define _IRMOV 4'b0011
+    `define _RMMOV 4'b0100
+    `define _MRMOV 4'b0101
+    `define _OP 4'b0110
+    `define _JXX 4'b0111
+    `define _CALL 4'b1000
+    `define _RET 4'b1001
+    `define _PUSH 4'b1010
+    `define _POP 4'b1011
+    `define _NONE 4'b0000
+    `define _RSP 4'b0100
+    `define _REGNONE 4'b1111
     `define _OK 1
     `define _ADR 2
     `define _INS 3
     `define _HLT 4
-    `define _CMOVXX 2
+    `define _CMOVXX 4'b0010
 `endif
 
 `ifndef ALU_FUN_CODE

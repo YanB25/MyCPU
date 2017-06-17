@@ -10,7 +10,6 @@ module PC_MODULE(
     input [`DATA_WID - 1:0] valM
 
 );
-    wire [`DATA_WID - 1:0]PC;
     
     PC_INCRE pc_incre(
         .valP(valP),

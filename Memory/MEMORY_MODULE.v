@@ -8,8 +8,9 @@ module MEMORY_MODULE(
     input [`ADDR_WID - 1 : 0] icode,
     input instr_valid,
     input imem_error,
+    input CLK,
     output [`ADDR_WID - 1 : 0] stat,
-    output [`DATA_WID - 1 : 0] valM,
+    output [`DATA_WID - 1 : 0] valM
 );
     wire [`DATA_WID - 1 : 0] output_data;// wire
     wire [`DATA_WID - 1 : 0] output_addr;// wire
@@ -48,7 +49,7 @@ module MEMORY_MODULE(
         .addr(output_addr),
         .write_flag(write_flag),
         .read_flag(read_flag),
-
+        .CLK(CLK),
         .valM(valM),
         .dmem_error(dmem_error)
     );

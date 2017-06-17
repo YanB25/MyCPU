@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-`include "head.v"
+`include "../header/head.v"
 module REGISTER_FILE_MODULE(
     input [`ADDR_WID - 1:0] rA,
     input [`ADDR_WID - 1:0] rB,

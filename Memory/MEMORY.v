@@ -31,7 +31,7 @@ always@(posedge CLK) begin
 
 end
 
-always@(read_flag or data) begin
+always@(*) begin
     if (read_flag == 1) begin
         valM = data[addr];
     end

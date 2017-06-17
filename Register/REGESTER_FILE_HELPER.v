@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-`include "head.v"
+`include "../header/head.v"
 
 module SRC_A(
     input [`ADDR_WID - 1: 0]rA,

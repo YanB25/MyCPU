@@ -17,7 +17,7 @@ module CPU(
         .valM(valM),
         .valP(valP),
         .PC(PC)
-    )
+    );
 
     wire [3:0] ifun;
     wire [3:0] rA;
@@ -49,7 +49,7 @@ module CPU(
 
     ALU_MODULE alu_module(
         .icode(icode),
-        .ifun(ifum),
+        .ifun(ifun),
         .valA(valA),
         .valB(valB),
         .valC(valC),
@@ -59,9 +59,10 @@ module CPU(
 
     wire instr_valid = 1; // TODO
     wire imem_error = 0; //TODO
-    wire [1:0] stat; // TODO
+    wire [3:0] stat; // TODO
     
     MEMORY_MODULE memory_module(
+        .CLK(CLK),
         .valP(valP),
         .valA(valA),
         .valE(valE),
