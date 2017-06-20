@@ -11,7 +11,7 @@ module INSTRU_MEM_MODULE (
     
     INSTRU_MEN instru_men (
         .PC(PC),
-        .icode(icode),
+        .icode(icode),  
         .ifun(ifun),
         .rA(rA),
         .rB(rB),
