@@ -95,11 +95,21 @@ module STAT(
         stat = 4'b0001;
     end
     always@(*) begin
+<<<<<<< HEAD
         // case (icode)
         //     `HALT:
         //         stat = `HLT;
         
         // endcase
+=======
+         case (icode)
+            `HALT:
+                 stat = `HLT;
+            default:
+                stat = `OK;
+            
+         endcase
+>>>>>>> YB
        
     end
 endmodule // STAT

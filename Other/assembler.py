@@ -25,6 +25,13 @@ def bit2hex(b):
         return chr(ord("A") + b - 10)
 
 def num2hex(n):
+<<<<<<< HEAD
+=======
+    '''
+    n : integer(input number)
+    return : string (return a 16-big string)
+    '''
+>>>>>>> YB
     tmp = []
     n = int(n)
     if (n < 0):
@@ -53,13 +60,21 @@ r_reg_reg = r"({},\s?{})".format(r_reg, r_reg)
 # valreg for $(120)%rax like this
 # val for instant number like $(120)
 r_ins = r"(\$\(-?\d+\))"
+<<<<<<< HEAD
+=======
+r_label = r"(\.[a-zA-Z]+)"
+>>>>>>> YB
 r_ins_reg = r"({},\s?{})".format(r_ins, r_reg)
 r_valreg = "({}{})".format(r_ins, r_reg)
 r_order_none = "(halt|nop|ret)"
 r_order_reg_reg = "(rrmovq|cmovle|cmovl|cmove|cmovne|cmovge|cmovg|addq|subq|andq|xorq)"
 r_order_reg_valreg = "(rmmovq)"
 r_order_valreg_reg = "(mrmovq)"
+<<<<<<< HEAD
 r_order_val = "(jmp|jle|jl|je|jne|jge|jg|call)"
+=======
+r_order_label = "(jmp|jle|jl|je|jne|jge|jg|call)"
+>>>>>>> YB
 r_order_val_reg = "(irmovq)"
 r_order_reg = "(pushq|popq)"
 
@@ -67,6 +82,7 @@ regex_instru_none = "({}$)".format(r_order_none)
 regex_instru_reg_reg = "({}\s{}$)".format(r_order_reg_reg, r_reg_reg)
 regex_instru_reg_valreg = "({}\s{},\s?{}$)".format(r_order_reg_valreg, r_reg, r_valreg)
 regex_instru_valreg_reg = "({}\s{},\s?{}$)".format(r_order_valreg_reg, r_valreg, r_reg)
+<<<<<<< HEAD
 regex_instru_val = "({}\s{}$)".format(r_order_val, r_ins)
 regex_instru_val_reg = "({}\s{},\s?{}$)".format(r_order_val_reg, r_ins, r_reg)
 regex_instru_reg = "({}\s{}$)".format(r_order_reg, r_reg)
@@ -88,15 +104,68 @@ for instru in data_line:
 
     print("{:<2} {:<30}".format(line_num, instru), end = ' ')
     if (match(regex_instru_reg_valreg, instru)):
+=======
+regex_instru_label = "({}\s{}$)".format(r_order_label, r_label)
+regex_instru_val_reg = "({}\s{},\s?{}$)".format(r_order_val_reg, r_ins, r_reg)
+regex_instru_reg = "({}\s{}$)".format(r_order_reg, r_reg)
+
+regex_instrument = "({}|{}|{}|{}|{}|{}|{})".format(regex_instru_none, regex_instru_reg_reg, regex_instru_reg_valreg, regex_instru_valreg_reg, regex_instru_label, regex_instru_val_reg, regex_instru_reg)
+
+regex_label = r"\.([a-zA-Z]+):"
+
+# read the txt
+f = open(input_filename, "r")
+input_data = f.read()
+
+# prepocessing : remove all the /* */ comment
+regex_comment = r"/\*([^\*\\/])*\*/"
+input_data = sub(regex_comment, "", input_data)
+
+# split data into lines
+data_line = input_data.split("\n")
+
+line_num = 0
+label2line = {}
+#print(data_line)
+error_msgs = ""
+output_data = ""
+num_of_bits_till_this_line = [0 for x in range(len(data_line))]
+
+for instru in data_line:
+    instru = instru.strip()
+    
+    if (instru == ""):
+        continue
+    matchIsLabel = match(regex_label, instru)
+    if (matchIsLabel):
+        print(matchIsLabel.group())
+        label2line[matchIsLabel.groups()[0]] = line_num + 1
+        continue
+
+    line_num += 1
+    num_of_bits_till_this_line[line_num] = num_of_bits_till_this_line[line_num - 1]
+
+    ret = instru # ret means the print-out thing
+
+    print("{:<2} {:<30}".format(line_num, instru), end = ' ')
+    if (match(regex_instru_reg_valreg, instru)): # rmmovq
+>>>>>>> YB
         m = match(regex_instru_reg_valreg, instru)
         ret = "40 "
         ret += bit2hex(register[m.groups()[2]])
         ret += bit2hex(register[m.groups()[-1]])
         ret += " "
         ret += num2hex(m.groups()[-2][2:-1])
+<<<<<<< HEAD
         #print(m.groups())
     #WARNING: rB is before rA!
     elif(match(regex_instru_valreg_reg, instru)):
+=======
+        num_of_bits_till_this_line[line_num] += 10
+        #print(m.groups())
+    #WARNING: rB is before rA!
+    elif(match(regex_instru_valreg_reg, instru)): # mrmovq
+>>>>>>> YB
         m = match(regex_instru_valreg_reg, instru)
         ret = "50 "
         #print(m.groups())
@@ -104,16 +173,40 @@ for instru in data_line:
         ret += bit2hex(register[m.groups()[-2]])
         ret += " "
         ret += num2hex(m.groups()[-3][2:-1])
+<<<<<<< HEAD
     # general cases
         
     elif (match(regex_instru_val_reg, instru)):
+=======
+        num_of_bits_till_this_line[line_num] += 10
+    # general cases
+        
+    elif (match(regex_instru_val_reg, instru)): #irmovq
+>>>>>>> YB
         m = match(regex_instru_val_reg, instru)
         ret = "30 F"
         ret += bit2hex(register[m.groups()[-1]]) + " "
         ret += num2hex(m.groups()[-2][2:-1])
+<<<<<<< HEAD
         #print(m.groups())
 
     elif (match(regex_instrument, instru)):
+=======
+        num_of_bits_till_this_line[line_num] += 10
+        #print(m.groups())
+
+    elif (match(regex_instrument, instru)):
+        #modify the num of bits till this line
+        if ("halt" in instru or "nop" in instru or "ret" in instru):
+            num_of_bits_till_this_line[line_num] += 1
+        elif ("pushq" in instru or "popq" in instru or "cmov" in instru or "rrmovq" in instru):
+            num_of_bits_till_this_line[line_num] += 2
+        elif ("andq" in instru or "xorq" in instru or "addq" in instru or "subq" in instru):
+            num_of_bits_till_this_line[line_num] += 2
+        else:
+            num_of_bits_till_this_line[line_num] += 9
+
+>>>>>>> YB
         ret = sub("halt", "00", ret)
         ret = sub("nop", "10", ret)
         ret = sub("rrmovq", "20", ret)
@@ -199,6 +292,18 @@ else:
         output_data = sub("E", "1110", output_data)
         output_data = sub("F", "1111", output_data)
 
+<<<<<<< HEAD
     fout.write(output_data)
 #fout = open("a.s", "w")
 #fout.write(input_data)
+=======
+    # change label into number
+    for label in label2line:
+        subNumber = num2hex(num_of_bits_till_this_line[label2line[label] - 1])
+        output_data = sub("." + label, subNumber, output_data)
+    fout.write(output_data)
+#fout = open("a.s", "w")
+#fout.write(input_data)
+print(label2line)
+print(num_of_bits_till_this_line)
+>>>>>>> YB

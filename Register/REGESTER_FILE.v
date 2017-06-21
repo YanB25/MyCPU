@@ -28,7 +28,11 @@ module REGESTER_FILE (
         data[destM] = valM;
         //$display("abc: %h %h %h %h %0t", destE, destM, valE, valM, $time);
     end
+<<<<<<< HEAD
     always@(srcA or srcB) begin
+=======
+    always@(*) begin
+>>>>>>> YB
         valA = data[srcA];
         valB = data[srcB];
         //$display("combination: %h %h %h %h", srcA, srcB, valA, valB);

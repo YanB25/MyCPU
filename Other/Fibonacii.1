@@ -1,0 +1,37 @@
+.main:
+irmovq $(4), %rdi
+call .fun
+halt
+
+
+.fun:
+pushq %rbx
+irmovq $(1), %rax
+rrmovq %rdi, %rbx
+
+irmovq $(1), %rcx
+irmovq $(2), %rdx
+subq %rdi, %rcx
+je .Base
+subq %rdi, %rdx
+je .Base
+
+irmovq $(1), %r8
+subq %r8, %rbx
+rrmovq %rbx, %rdi
+call .fun
+
+rrmovq %rax, %rsi
+
+irmovq $(1), %r8
+subq %r8, %rbx
+rrmovq %rbx, %rdi
+call .fun
+
+addq %rsi, %rax
+
+ret
+
+.Base:
+popq %rbx
+ret

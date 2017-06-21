@@ -6,6 +6,10 @@
 
 
 module MEMORY_ALL(
+<<<<<<< HEAD
+=======
+    input wire CLK,
+>>>>>>> YB
     input reg [`DATA_WID - 1 : 0] valP,// input
     input reg [`DATA_WID - 1 : 0] valA,// input
     input reg [`DATA_WID - 1 : 0] valE,// input
@@ -55,6 +59,10 @@ MEM_WRITE mem_write1(
 );
 
 MEMORY memory1(
+<<<<<<< HEAD
+=======
+    .CLK(CLK),
+>>>>>>> YB
     .write_data(output_data),
     .addr(output_addr),
     .write_flag(write_flag),

@@ -1,0 +1,22 @@
+.main:
+    irmovq $(10), %rbp
+    pushq %rbp
+    mrmovq (%rsp), %rdi
+    call .rfact
+    popq %rbp
+    halt
+.rfact:
+    pushq %rbp
+    rrmovq %rdi, %rbp
+    cmp $(1) %rdi
+    jle .done
+    subl $(1) %rdi
+    call .rfact
+    // *
+
+
+
+.done:
+    popq %rbp
+    ret
+

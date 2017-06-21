@@ -1,0 +1,15 @@
+.main:
+irmovq $(1), %rcx /* incre */
+irmovq $(0), %rax /* result of sum */
+irmovq $(0), %rdx /* term to add */
+
+.Loop:
+irmovq $(10), %rdi /* terminal */
+addq %rcx, %rdx
+addq %rdx, %rax
+subq %rdx, %rdi
+je .End
+jmp .Loop
+
+.End:
+halt

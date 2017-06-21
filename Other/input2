@@ -1,0 +1,14 @@
+.main:
+    irmovq $(5), %rbp
+    pushq %rbp
+    rrmovq %rsp, %rdi
+    call .Fun
+    popq %rbp
+    halt
+.Fun:
+    pushq %rbp
+    irmovq $(3), %rbp
+    mrmovq $(0)%rdi, %rax
+    addq %rbp, %rax
+    popq %rbp
+    ret
