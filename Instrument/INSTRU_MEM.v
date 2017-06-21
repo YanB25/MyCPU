@@ -18,25 +18,18 @@ module INSTRU_MEN (
         $display("%h %h %h %h", INSTRUCTION_MEM[0], INSTRUCTION_MEM[1], INSTRUCTION_MEM[2], INSTRUCTION_MEM[3]);
     end
     always@(*) begin
-<<<<<<< HEAD
-        // $display("PC %h", PC[3:0]);
-=======
         $display("PC %h", PC[3:0]);
->>>>>>> YB
         INSTRUCTION = INSTRUCTION_MEM[PC];
         //$display("IN %h %h", INSTRUCTION, PC);
         REGISTER = INSTRUCTION_MEM[PC + 1];
         //$display("RE %h", REGISTER);
         
         // TODO: bug
-<<<<<<< HEAD
-=======
 //        test = icode == `_JXX || icode == `_CALL
         ifun = INSTRUCTION[3:0];
         icode = INSTRUCTION[7:4];
         rB = REGISTER[3:0];
         rA = REGISTER[7:4];
->>>>>>> YB
         if (icode == `_JXX || icode == `_CALL) begin
             valC[7:0] = INSTRUCTION_MEM[PC + 1];
             valC[15:8] = INSTRUCTION_MEM[PC + 2];
@@ -57,13 +50,6 @@ module INSTRU_MEN (
             valC[63:56] = INSTRUCTION_MEM[PC + 9];
         end
         //
-<<<<<<< HEAD
-        ifun = INSTRUCTION[3:0];
-        icode = INSTRUCTION[7:4];
-        rB = REGISTER[3:0];
-        rA = REGISTER[7:4];
-=======
 
->>>>>>> YB
     end
 endmodule

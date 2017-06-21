@@ -7,10 +7,7 @@
 
 
 module ALU(
-<<<<<<< HEAD
-=======
     input CLK,
->>>>>>> YB
     output reg [`DATA_WID - 1:0]valE, //value after execute
     output reg [3:0]CC, //condition code
     input [1:0]ALUfun, //determine ALU function
@@ -18,10 +15,7 @@ module ALU(
     input [`DATA_WID - 1:0]ALUB, //input B
     input set_cond
 );
-<<<<<<< HEAD
-=======
 /*
->>>>>>> YB
     always@(*) begin
         case(ALUfun)
             `_Add : begin
@@ -29,8 +23,6 @@ module ALU(
             end
             `_Sub : begin
                 valE = ALUB - ALUA;
-<<<<<<< HEAD
-=======
 
             end
             `_And : begin
@@ -61,7 +53,6 @@ module ALU(
             `_Sub : begin
                 valE = ALUB - ALUA;
 
->>>>>>> YB
             end
             `_And : begin
                 valE = ALUB & ALUA;
@@ -70,11 +61,8 @@ module ALU(
                 valE = ALUB | ALUA;
             end
         endcase
-<<<<<<< HEAD
-=======
     end
     always@(posedge CLK) begin
->>>>>>> YB
         if (set_cond) begin
             CC[`ZF] = valE == 0;
             CC[`SF] = valE[`DATA_WID - 1] == 1;
@@ -85,9 +73,6 @@ module ALU(
             CC[`CF] = (valE < ALUA);
         end
     end
-<<<<<<< HEAD
-=======
 
->>>>>>> YB
 endmodule
 

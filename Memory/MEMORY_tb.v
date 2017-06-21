@@ -24,15 +24,12 @@ wire write_flag;// wire
 wire read_flag; // wire
 wire dmem_error; // wire
 
-<<<<<<< HEAD
-=======
     reg CLK = 0;
     parameter period = 10;
     always begin
         #(period/2);
         CLK = ~CLK;
     end
->>>>>>> YB
 
 MEM_ADDR mem_addr1(
     .valE(valE),
@@ -61,10 +58,7 @@ MEM_WRITE mem_write1(
 );
 
 MEMORY memory1(
-<<<<<<< HEAD
-=======
     .CLK(CLK),
->>>>>>> YB
     .write_data(output_data),
     .addr(output_addr),
     .write_flag(write_flag),
@@ -92,76 +86,44 @@ initial begin
         valP = 8'h20;
     #10;     
         icode = 4'h4;
-<<<<<<< HEAD
-        valE = 8'h01;
-=======
         valE = 8'd08;
->>>>>>> YB
         valA = 8'h11;
         valP = 8'h20;
     #10;
         icode = 4'h4;
-<<<<<<< HEAD
-        valE = 8'h02;
-=======
         valE = 8'd16;
->>>>>>> YB
         valA = 8'h22;
         valP = 8'h20;
     #10;
         icode = 4'h4;
-<<<<<<< HEAD
-        valE = 8'h03;
-=======
         valE = 8'd24;
->>>>>>> YB
         valA = 8'h33;
         valP = 8'h20;
     #10;
         icode = 4'h4;
-<<<<<<< HEAD
-        valE = 8'h04;
-=======
         valE = 8'd32;
->>>>>>> YB
         valA = 8'h44;
         valP = 8'h20;
     #10;
         icode = 4'h4;
-<<<<<<< HEAD
-        valE = 8'h05;
-=======
         valE = 8'd40;
->>>>>>> YB
         valA = 8'h55;
         valP = 8'h20;
     #10;
         icode = 4'h4;
-<<<<<<< HEAD
-        valE = 8'h06;
-=======
         valE = 8'd48;
->>>>>>> YB
         valA = 8'h66;
         valP = 8'h20;
     #10;
         icode = 4'h4;//rmmov
-<<<<<<< HEAD
-        valE = 8'h07;
-=======
         valE = 8'd56;
->>>>>>> YB
         valA = 8'h77;
         valP = 8'h20;
     #10;
 // initialize memory from  01 to 07
  
         icode = 4'h5;//mrmov
-<<<<<<< HEAD
-        valE = 8'h03;
-=======
         valE = 8'h08;
->>>>>>> YB
         valA = 8'h30;
         valP = 8'h20;
     #10;
@@ -185,14 +147,11 @@ initial begin
         valA = 8'h09;
         valP = 8'h20;
     #10;
-<<<<<<< HEAD
-=======
         icode = 4'h2;//ret
         valE = 8'h09;
         valA = 8'h09;
         valP = 8'h20;
     #10;
->>>>>>> YB
 
 end 
 
